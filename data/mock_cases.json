@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": "C001_快速通过",
+    "applicant": {
+      "年龄": 34,
+      "月收入": 26000,
+      "司龄月数": 62,
+      "近12月逾期次数": 0,
+      "信用卡使用率": 0.18,
+      "app活跃天数_近30日": 22
+    },
+    "scores": { "p_want": 0.82, "p_risk": 0.04 },
+    "shap_top": [
+      { "head": "want", "feature": "app活跃天数_近30日", "value": 22, "contribution": 0.21 },
+      { "head": "want", "feature": "近7日额度页浏览次数", "value": 9, "contribution": 0.14 },
+      { "head": "risk", "feature": "近12月逾期次数", "value": 0, "contribution": -0.18 },
+      { "head": "risk", "feature": "信用卡使用率", "value": 0.18, "contribution": -0.09 }
+    ]
+  },
+  {
+    "case_id": "C002_硬拒绝",
+    "applicant": {
+      "年龄": 27,
+      "月收入": 8000,
+      "司龄月数": 5,
+      "近12月逾期次数": 4,
+      "信用卡使用率": 0.93,
+      "app活跃天数_近30日": 18
+    },
+    "scores": { "p_want": 0.61, "p_risk": 0.35 },
+    "shap_top": [
+      { "head": "want", "feature": "app活跃天数_近30日", "value": 18, "contribution": 0.12 },
+      { "head": "risk", "feature": "近12月逾期次数", "value": 4, "contribution": 0.24 },
+      { "head": "risk", "feature": "信用卡使用率", "value": 0.93, "contribution": 0.17 },
+      { "head": "risk", "feature": "司龄月数", "value": 5, "contribution": 0.08 }
+    ]
+  },
+  {
+    "case_id": "C003_灰区_高意愿高风险",
+    "applicant": {
+      "年龄": 30,
+      "月收入": 15000,
+      "司龄月数": 28,
+      "近12月逾期次数": 1,
+      "信用卡使用率": 0.71,
+      "app活跃天数_近30日": 26
+    },
+    "scores": { "p_want": 0.78, "p_risk": 0.16 },
+    "shap_top": [
+      { "head": "want", "feature": "app活跃天数_近30日", "value": 26, "contribution": 0.23 },
+      { "head": "want", "feature": "近7日额度页浏览次数", "value": 14, "contribution": 0.17 },
+      { "head": "risk", "feature": "信用卡使用率", "value": 0.71, "contribution": 0.12 },
+      { "head": "risk", "feature": "近12月逾期次数", "value": 1, "contribution": 0.07 }
+    ]
+  },
+  {
+    "case_id": "C004_灰区_低意愿低风险",
+    "applicant": {
+      "年龄": 41,
+      "月收入": 32000,
+      "司龄月数": 110,
+      "近12月逾期次数": 0,
+      "信用卡使用率": 0.12,
+      "app活跃天数_近30日": 4
+    },
+    "scores": { "p_want": 0.35, "p_risk": 0.06 },
+    "shap_top": [
+      { "head": "want", "feature": "app活跃天数_近30日", "value": 4, "contribution": -0.19 },
+      { "head": "want", "feature": "近7日额度页浏览次数", "value": 0, "contribution": -0.11 },
+      { "head": "risk", "feature": "近12月逾期次数", "value": 0, "contribution": -0.16 },
+      { "head": "risk", "feature": "月收入", "value": 32000, "contribution": -0.1 }
+    ]
+  }
+]
