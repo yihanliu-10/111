@@ -177,6 +177,7 @@
 - PF-ODE 精确似然 OOD 检测成熟,表征空间效果最好。**例文**:Ding et al., "Revisiting Likelihood-Based OOD Detection by Modeling Representations", SCIA 2025, arXiv:2504.07793——预训练编码器特征上训 RDM(表征扩散模型),RK45 解 PF-ODE + 瞬时变量替换公式算精确 log p(z) 作 OOD 分数(散度项 Skilling–Hutchinson 迹估计);像素空间似然失灵(Nalisnick 现象),表征空间追平 SOTA。数学源头:Song et al., Score-Based Generative Modeling through SDEs, ICLR 2021。同族:CNF 局部轨迹诊断 OOD(arXiv:2606.00684)。**V2 变体即以此为模板**:mammo backbone 特征 + 多源条件 RDM(ConRDM)+ 路径动能作偏移严重度。
 - GDA 理论:中间域沿 Wasserstein 测地线(GOAT;GDA Theory arXiv:2310.13852;梯度流 GDA, ICLR 2024)。
 - **Mammo 空位**:仅 BN 适应(DoSReMC, arXiv:2508.15452)与老式对抗 DA;MammoFlow(arXiv:2606.28537)是视角合成非域偏移。桥/ODE 式跨厂商协调在 mammo 为空白。
+- **CLIPTTA(NeurIPS 2025, arXiv:2507.14312)**:熵最小化 TTA 与 CLIP 对比预训练目标不对齐 → 伪标签漂移/类塌缩;改用软对比损失(损失形状与预训练一致),梯度分析证明 batch 内互斥项防塌缩;OCE 损失做开集 TTA(边适应边推开 OOD)。**接口**:①坐实"熵 TTA 结构性缺陷"论据(与本项目低患病率失效分析互补);②新路线:Mammo-CLIP + 软对比 TTA + 患病率感知 batch 设计(极端不平衡下 batch 互斥项行为是开放问题);③OCE 思想衔接类型化分诊。
 
 **V1(主)·图像空间归一化桥**:
 - 5 源域训**域条件 flow matching / Schrödinger 桥**:速度场 v(x,t,z_d) 把各源域运往共同规范域(hub);z_d = 由域统计量(频域/直方图/BN 统计)编码的**连续域嵌入**,未见域取嵌入插值/外推 → 解 PF-ODE 完成厂商归一化;分类器只在规范域训练、永远冻结。
