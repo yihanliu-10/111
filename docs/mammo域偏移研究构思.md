@@ -174,7 +174,7 @@
 - 输入侧 ODE 适应范式:DDA(CVPR 2023, arXiv:2207.03442)——扩散把 OOD 输入投影回源分布,分类器冻结;仅自然图像。
 - SB 无配对医学协调已落地:OCT(NeurIPS 2025 解剖引导潜空间 SB)、CBCT→CT(解剖保持 SB)、UNSB(arXiv:2305.15086)、BlindHarmony(流模型盲协调 MRI, arXiv:2305.10732)。
 - 近邻:MedShift(arXiv:2508.21435)类条件 flow matching 做 X 光域翻译(仿真→真实),未做乳腺/未见域。
-- PF-ODE 精确似然 OOD 检测成熟,表征空间效果最好(arXiv:2504.07793)。
+- PF-ODE 精确似然 OOD 检测成熟,表征空间效果最好。**例文**:Ding et al., "Revisiting Likelihood-Based OOD Detection by Modeling Representations", SCIA 2025, arXiv:2504.07793——预训练编码器特征上训 RDM(表征扩散模型),RK45 解 PF-ODE + 瞬时变量替换公式算精确 log p(z) 作 OOD 分数(散度项 Skilling–Hutchinson 迹估计);像素空间似然失灵(Nalisnick 现象),表征空间追平 SOTA。数学源头:Song et al., Score-Based Generative Modeling through SDEs, ICLR 2021。同族:CNF 局部轨迹诊断 OOD(arXiv:2606.00684)。**V2 变体即以此为模板**:mammo backbone 特征 + 多源条件 RDM(ConRDM)+ 路径动能作偏移严重度。
 - GDA 理论:中间域沿 Wasserstein 测地线(GOAT;GDA Theory arXiv:2310.13852;梯度流 GDA, ICLR 2024)。
 - **Mammo 空位**:仅 BN 适应(DoSReMC, arXiv:2508.15452)与老式对抗 DA;MammoFlow(arXiv:2606.28537)是视角合成非域偏移。桥/ODE 式跨厂商协调在 mammo 为空白。
 
