@@ -15,6 +15,8 @@ from sklearn.metrics import roc_auc_score
 rng = np.random.RandomState(0)
 z = np.load(pathlib.Path(__file__).parent / "ltaf_windows.npz", allow_pickle=True)
 feats, af_frac, rec_id = z["feats"], z["af_frac"], z["rec_id"]
+if len(feats) == 0:
+    raise SystemExit("特征缓存是空的——先修好 config.py 的 LTAF_DIR,重跑 embed_ltaf.py。")
 
 # 记录级标签与分层(负荷 = AF 窗占比)
 recs = np.unique(rec_id)

@@ -3,11 +3,9 @@
 用法:改 DATA 为本机 ltafdb 路径,然后  py stats_ltaf.py
 输出:每条记录的时长与 AF 占比 + 四档分布统计(判断选段策略有无价值)。
 """
-import pathlib
-
 import wfdb
 
-DATA = pathlib.Path("C:/Users/li.ruili/ltafdb")  # ← 改成你的实际路径
+from config import LTAF_DIR as DATA
 
 AF_LABELS = ("(AFIB", "(AFL")
 

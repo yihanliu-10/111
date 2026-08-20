@@ -10,7 +10,7 @@ import pathlib
 import numpy as np
 import wfdb
 
-DATA = pathlib.Path("C:/Users/li.ruili/ltafdb")  # ← 改成你的 LTAF 路径
+from config import LTAF_DIR as DATA
 OUT = pathlib.Path(__file__).parent / "ltaf_windows.npz"
 WIN = 60  # 窗长(秒)
 
@@ -46,6 +46,9 @@ def window_features(rr):
 
 feats, af_fracs, rec_ids, win_ids = [], [], [], []
 records = sorted(p.stem for p in DATA.glob("*.hea"))
+if not records:
+    raise SystemExit(f"在 {DATA} 没找到任何 .hea 文件——去 ecg/config.py 把 LTAF_DIR "
+                     f"改成 stats_ltaf.py 能跑通的那个路径(注意别多/少一层目录)。")
 for ri, rec in enumerate(records):
     try:
         ann = wfdb.rdann(str(DATA / rec), "atr")
