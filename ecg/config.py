@@ -6,4 +6,4 @@ import pathlib
 LTAF_DIR = pathlib.Path(r"C:\Users\li.ruili\Desktop\ltafdb")
 
 # Icentia11k 全量下载目录(dl_icentia_full.py 的 OUT,一致即可)
-ICENTIA_DIR = pathlib.Path(r"D:\icentia11k")
+ICENTIA_DIR = pathlib.Path(r"C:\Users\li.ruili\icentia11k")
