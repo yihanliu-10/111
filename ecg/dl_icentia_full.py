@@ -9,9 +9,10 @@ import boto3
 from botocore import UNSIGNED
 from botocore.config import Config
 
+from config import ICENTIA_DIR as OUT
+
 BUCKET = "physionet-open"
 PREFIX = "icentia11k-continuous-ecg/1.0/"
-OUT = pathlib.Path("D:/icentia11k")  # ← 改成你要存的盘和目录
 THREADS = 32
 
 s3 = boto3.client("s3", region_name="us-east-1",
