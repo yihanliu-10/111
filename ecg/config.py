@@ -1,9 +1,19 @@
-"""数据路径统一配置——只需要改这一个文件。"""
+"""数据路径配置。
+
+默认值是实验室 Windows 机的路径;其他机器不要改本文件,
+在同目录新建 config_local.py 覆盖(已被 .gitignore 忽略,永不冲突):
+
+    # ecg/config_local.py 示例(个人电脑 H 盘部署)
+    import pathlib
+    LTAF_DIR = pathlib.Path(r"H:\\npj\\data\\ltafdb")
+    ICENTIA_DIR = pathlib.Path(r"H:\\npj\\data\\icentia11k")
+"""
 import pathlib
 
-# LTAF 数据目录:里面直接躺着 00.dat / 00.atr / 00.hea 这些文件。
-# 填 stats_ltaf.py 当时能跑通的那个路径。
 LTAF_DIR = pathlib.Path(r"C:\Users\li.ruili\Desktop\ltafdb")
-
-# Icentia11k 全量下载目录(dl_icentia_full.py 的 OUT,一致即可)
 ICENTIA_DIR = pathlib.Path(r"C:\Users\li.ruili\Desktop\icentia11k")
+
+try:
+    from config_local import *  # noqa: F401,F403  本机覆盖(可选)
+except ImportError:
+    pass
