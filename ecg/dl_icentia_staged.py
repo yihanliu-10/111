@@ -20,7 +20,7 @@ from config import ICENTIA_DIR as OUT
 
 BUCKET = "physionet-open"
 PREFIX = "icentia11k-continuous-ecg/1.0/"
-THREADS = 32
+THREADS = 64   # 小文件多、往返延迟是瓶颈,靠并发堆吞吐
 SEED = 0
 
 MAX_POS_SEG_PER_PATIENT = 6   # 每病人最多收的含 AF/AFL 段数
@@ -28,7 +28,7 @@ NEG_SEG_PER_PATIENT = 2       # 阴性病人每人收的正常段数
 N_NEG_PATIENTS = 2500         # 抽多少个阴性病人
 
 s3 = boto3.client("s3", region_name="us-east-1",
-                  config=Config(signature_version=UNSIGNED, max_pool_connections=64))
+                  config=Config(signature_version=UNSIGNED, max_pool_connections=128))
 
 def list_all_keys():
     cache = OUT / "_all_keys.txt"
