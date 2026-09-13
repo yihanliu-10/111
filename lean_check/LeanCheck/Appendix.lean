@@ -5,6 +5,7 @@ import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Abel
 
 /-!
 # Machine-checked verification of Appendix A.1 of
@@ -59,7 +60,7 @@ theorem proj_remove [DecidableEq N] (A : Matrix K N 𝕜) (ρ : N → 𝕜) (i :
     ext j
     by_cases hj : j = i
     · subst hj; simp
-    · simp [Function.update_of_ne hj, Pi.single_apply, hj]
+    · simp [hj]
   rw [h, Matrix.mulVec_sub, Matrix.mulVec_smul, Matrix.mulVec_single_one]
 
 /-! ## Section 4.1 — the density cost -/
@@ -71,9 +72,9 @@ def cost (A : Matrix K N 𝕜) (y : K → 𝕜) (ρ : N → 𝕜) : 𝕜 :=
 /-- The feasible set `ρ ≥ 0` of Eq. (8). -/
 def Feasible (ρ : N → 𝕜) : Prop := ∀ i, 0 ≤ ρ i
 
-/-- `ρ⋆` attains the minimum in Eq. (8). -/
-def IsMinimizer (A : Matrix K N 𝕜) (y : K → 𝕜) (ρ⋆ : N → 𝕜) : Prop :=
-  Feasible ρ⋆ ∧ ∀ ρ, Feasible ρ → cost A y ρ⋆ ≤ cost A y ρ
+/-- `ρs` attains the minimum in Eq. (8). -/
+def IsMinimizer (A : Matrix K N 𝕜) (y : K → 𝕜) (ρs : N → 𝕜) : Prop :=
+  Feasible ρs ∧ ∀ ρ, Feasible ρ → cost A y ρs ≤ cost A y ρ
 
 theorem feasible_zero : Feasible (0 : N → 𝕜) := fun _ => le_rfl
 
@@ -102,10 +103,10 @@ theorem cost_expand (A : Matrix K N 𝕜) (y : K → 𝕜) (ρ Δ : N → 𝕜) 
 
 /-! ## Lemma 1 — the bounds `0 ≤ C(S) ≤ ½‖y‖²` (existence is not formalized here) -/
 
-theorem minimizer_bounds {A : Matrix K N 𝕜} {y : K → 𝕜} {ρ⋆ : N → 𝕜}
-    (h : IsMinimizer A y ρ⋆) :
-    0 ≤ cost A y ρ⋆ ∧ cost A y ρ⋆ ≤ (1 / 2) * (y ⬝ᵥ y) :=
-  ⟨cost_nonneg A y ρ⋆, by rw [← cost_zero A y]; exact h.2 0 feasible_zero⟩
+theorem minimizer_bounds {A : Matrix K N 𝕜} {y : K → 𝕜} {ρs : N → 𝕜}
+    (h : IsMinimizer A y ρs) :
+    0 ≤ cost A y ρs ∧ cost A y ρs ≤ (1 / 2) * (y ⬝ᵥ y) :=
+  ⟨cost_nonneg A y ρs, by rw [← cost_zero A y]; exact h.2 0 feasible_zero⟩
 
 /-! ## Lemma 2 — Eq. (11) and uniqueness of the fitted projection -/
 
